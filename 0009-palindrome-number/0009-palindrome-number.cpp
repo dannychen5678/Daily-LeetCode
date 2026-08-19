@@ -2,7 +2,7 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         // 1.負數必不為迴文
-        // 2.如果末位為0且本身不為0(0為回文)
+        // 2.末位為0的除了0以外都不是回文
         if (x < 0 || (x % 10 == 0 && x != 0)) return false;
 
         int revertedNumber = 0;
