@@ -1,38 +1,42 @@
 class Solution {
 public:
-    bool isPalindrome(int x) 
-    {
-     
-     if(x<0)return false;
-     if(x==0)return true;   //不斷/10的方法會排除掉0所以要額外設立條件
-     int count=0;
-     int temp;
-     temp=x; //x賦值給temp
+    bool isPalindrome(int x) {
+        // 1.負數必不為迴文
+        // 2.如果末位為0且本身不為0(0為回文)
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
 
-     while(temp!=0)//計算位數(不知道迴圈次數所以用while)
-     {
-        temp/=10;
-        count++;
-     }
+        int revertedNumber = 0;
+        //不管奇數或偶數只需要處理到中間位數即可(x>r)
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            //*10是為了將現有數字左移一位空出個位數字
 
-     vector<int>nums(count);//知道幾位之後,代表我們知道大小了所以宣告一個動態陣列(大小由剛剛得出的count所決定)
+            /*
+            (奇數處理)
+            x=121 r=0 進入loop       
+            x=12 r=1 繼續
+            x=1 r=12  結束
 
-     temp=x;//將temp內容從新初始化並且一樣從新賦值x
-     
-     for(int i=count-1;i>=0;i--)//將temp的數字由後往前賦給容器nums,使用for迴圈
-     {
-        nums[i]=temp%10;//取最後一位(%10的餘數除法)
-        temp/=10;//捨棄最後一位
-     }
-     for(int j=0;j<count;j++)//使用nums本身的索引不同完成 ex.長度3但實際到索引2
-     {
-        if(nums[j]!=nums[count-1-j])//與nums自身作比對即可
-        {
-            return false;
-        } 
-     
-     }
-     return true;
+            x=r/10
 
+            */
+            x /= 10;
+
+            /*
+            x=1221 r=0 進入loop
+            x=122  r=1 繼續
+            x=12   r=12 結束
+
+            x=r
+            */
+        }
+
+        //藉由最終x==r或者x==r/10d判斷是否回文
+
+        // 偶數位數時：兩者應完全相同（例如 1221 -> x=12, revertedNumber=12）
+        // 奇數位數時：去掉中間位數後應相同（例如 12321 -> x=12, revertedNumber=123）
+        if( x == revertedNumber || x == revertedNumber / 10)
+        return true;
+        else return false;
     }
 };
