@@ -25,8 +25,9 @@ public:
                 break;//直接換下一個strs[i]
                }
                */
-               if(j>prefix.length())
+               if(j>prefix.length()-1)
                {
+                different=true;
                 break;
                }
                if(prefix[j]!=strs[i][j])
