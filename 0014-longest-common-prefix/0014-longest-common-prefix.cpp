@@ -27,7 +27,7 @@ public:
                */
                if(j>prefix.length()-1)
                {
-                different=true;
+                different=true;                                                      
                 break;
                }
                if(prefix[j]!=strs[i][j])
@@ -46,3 +46,23 @@ public:
         return prefix;
     }
 };
+
+//迴圈裡面要先處理prefix先跑完的情況=>ex.prefix:flow strs[i]:flower
+//接著處裡正常情況prefix比strs[i]還長,或是相等長度
+//而正常情況又分為:strs[i]與prefix都比對無誤,以及中途確實有不同
+/*
+ex.
+
+中途有不同=>
+prefix:flower
+strs[i]:flowx
+
+都相等=>
+prefix:flower
+strs:flow
+
+處理順序是中途有不同以然後才是都相等
+
+中途有不同就是索引到不相同的字元的前一個位置然後當作prefix
+都相同就是prefix不變
+*/
