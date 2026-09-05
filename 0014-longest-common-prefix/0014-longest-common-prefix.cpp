@@ -1,7 +1,7 @@
 //三種情況
 /*
 ex.
-
+ 
 超出邊界情況=>
 prefix比strs[i]早結束=>prefix維持原先不動,還是strs[0]。,因為這樣代表prefix的字元都與strs[i]相同而題目球的是最常共同前綴子串,所以維持原先即可
 
@@ -59,6 +59,7 @@ public:
     {
         std::string prefix=strs[0]; //第一元素當成prefix,並且她是字串
         bool different=false;//宣告flag紀錄當前狀態,原始狀態為false
+        //different的意思應該是有沒有找到不同的字元
         for(int i=1;i<=strs.size()-1;i++)   //迭代每一個strs元素
         {
               different=false;//每一輪的different初始化為原始狀態
@@ -66,17 +67,17 @@ public:
             {
                if(j>prefix.length()-1)//處理超出prefix邊界情況
                {
-                 different=true;//prefix不變還是原始的strs[i]
+                 
                  break;
                } 
                 if(prefix[j]!=strs[i][j])//處理prefix與strs[i][j]不同的情況
                 {
                     prefix=prefix.substr(0,j);//prefix裁切為j之前位置的字串
-                    different=true; //變更flag狀態
+                    different=true; //變更flag狀態=>
                     break;
                 } 
             }
-             if(different==false) //處理str[i]與prefix完全相同
+             if(different==false&&strs[i].length()<prefix.length()) //處理str[i]與prefix完全相同,str[i]可能比prefix還短也有可能相同
                 {
                    prefix=strs[i];//prefix設為strs[i
                 }
