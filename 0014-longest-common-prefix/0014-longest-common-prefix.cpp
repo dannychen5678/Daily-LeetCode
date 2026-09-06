@@ -13,7 +13,7 @@ public:
 
     for(int i=1;i<strslength;i++) //開始跌代strs元素
     {
-       different=false;//每次都要初始化different
+      
 
     for(int j=0;j<strs[i].length();j++)//跌代strs[i]裡的每個元素,字元。
     {
@@ -27,7 +27,7 @@ public:
         //第二種情況prefix與strs[i]中途有不同,prefix設為j索引到最後相同位置的部分,並且更新狀態
         prefix=prefix.substr(0,j);//是用prefix,因為他才是完整字串
 
-        different=true;//更新狀態
+       
 
         }
     }
