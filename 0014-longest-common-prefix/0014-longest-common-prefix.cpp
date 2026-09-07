@@ -1,42 +1,26 @@
-class Solution 
+//雙指針邊界掃描
+//使用一個變數j用於紀錄當前正確位置,如果字元比對正確j+1
+class Solution
 {
 public:
     string longestCommonPrefix(vector<string>& strs)
     {
-     std::string prefix=strs[0];//第一個strs[0]設為前綴 
-            
-     int strslength=strs.size();//取得strs的大小用於跌代=>vector使用.size()
+       if(strs.empty()) return "";
 
-     bool different=false;//使用flag用於監控狀態=>三種情況
+       std::string prefix=strs[0];
 
-     if(strs.empty())return "";//檢測strs是否為空,為空的話直接回傳空字串
-
-    for(int i=1;i<strslength;i++) //開始跌代strs元素
-    {
-      
-
-    for(int j=0;j<strs[i].length();j++)//跌代strs[i]裡的每個元素,字元。
-    {
-        if(j>prefix.length())//第一種情況prefix比strs提早結束
-        {
-            break;//換到下一個strs[i],前綴不變且狀態也維持不變(different),前綴維持當前prefix
-        }
-
-        if(prefix[j]!=strs[i][j])
-        {
-        //第二種情況prefix與strs[i]中途有不同,prefix設為j索引到最後相同位置的部分,並且更新狀態
-        prefix=prefix.substr(0,j);//是用prefix,因為他才是完整字串
-
-       
-
-        }
-    }
-    //最後一種情況=>當j都順利跌代完後(strs[i]<prefix[j])
-       if(strs[i].length()<prefix.length())
+       for(int i=1;i<strs.size();i++)
        {
-        prefix=strs[i];
+        int j=0;
+        while(j<prefix.length()&&j<strs[i].length()&&prefix[j]==strs[i][j])
+        {
+            j++;
+        }
+        prefix=prefix.substr(0,j);
+
+        if(prefix.empty()) return "";
        }
-    }
-    return prefix; //回傳prefix
+
+       return prefix;
     }
 };
